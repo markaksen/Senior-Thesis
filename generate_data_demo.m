@@ -4,7 +4,7 @@
 data=(x.^2+(y*1.5).^2+z.^2)<0^2;
 [ALM, Cl] = spherical_harm_coeff(data);
 [ALM_tilde] = recon_spherical_harm_coeff(ALM);
-save('data0.mat');
+save('data4.mat');
 %load('data4.mat')
 %maxphi = 50; maxtheta = 20;
 %[phi_hat] = recon_fourier_transform(ALM_m, maxphi, maxtheta)
