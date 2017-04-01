@@ -10,15 +10,20 @@ for k=1:length(dim)
     %data=((x-1).^2+(1.5*(y+1)).^2+(z+1).^2)<(dim(k))^2; %ellipsoid
     %data=((x).^2+(y).^2+(z).^2)<(dim(k))^2; % sphere
     data = (4.25*dim(k)^2 - (x.^2 + (1.5*y).^2+z.^2))/(4.25*(dim(k))^2);
+    r_cut = 0.5;
+    maxL = maximum_l(dim(k));
+    [recovered_data,~,~,jball_size] = recover_data(data,maxL,r_cut);
+    data = recovered_data;
     %data = (x.^2)/9 + (y.^2)/16 < 1; %cylinder
-    data = double(data);
+    %data = double(data);
     
     %sz = num2str(dim(k));
     %str = strcat('ellipsoid_smooth',sz,'.mrc');
-    %WriteMRC(data,1,str);
+    WriteMRC(data,1,str);
     
     maxL = maximum_l(dim(k));
-    [recovered_data,~,~,jball_size] = recover_data(data,maxL);
+    r_cut = 1;
+    [recovered_data,~,~,jball_size] = recover_data(data,maxL,r_cut);
     jball_size_vec(k) = jball_size;
     
     %str = strcat('ellipsoid_smooth_exact',sz,'.mrc');
